@@ -32,7 +32,7 @@ class Home extends Component {
       const data = await AsyncStorage.getItem('ItemList');
       console.log(data)
       if (data !== null) {
-        this.setState({ data, isDataEmpty: false });
+        this.setState({ data: JSON.parse(data), isDataEmpty: false });
         console.log(this.state.data);
       } else {
         return fetch(
@@ -72,14 +72,14 @@ class Home extends Component {
   };
 
   _addToAsyncStorage = async () => {
-    console.log( JSON.stringify(this.state.data))
+    console.log(JSON.stringify(this.state.data))
     console.log("provo a salvare")
     try {
       await AsyncStorage.setItem('ItemList', JSON.stringify(this.state.data)), () => {
         console.log ("Fatto!")
       };
     } catch (error) {
-      // errore
+      // error
     }
   };
 
